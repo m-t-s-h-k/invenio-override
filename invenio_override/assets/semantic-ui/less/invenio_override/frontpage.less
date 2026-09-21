@@ -172,6 +172,20 @@ h2 {
   margin-bottom: 0.5rem;
 }
 
+.page-inner-banner-back {
+  display: inline-block;
+  margin-bottom: 0.75rem;
+  font-size: @font-size-sm;
+  color: @recordText;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: @overrideAccentText;
+    text-decoration: none;
+  }
+}
+
 .page-inner-banner-description {
   font-size: clamp(1rem, 1.5vw, 1.1rem);
   color: @recordText;
