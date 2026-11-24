@@ -1,5 +1,6 @@
 {#
   SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+  SPDX-FileCopyrightText: 2026 University of Graz.
   SPDX-License-Identifier: MIT
 #}
 <section class="random-records-frontpage frontpage-tabbed"
@@ -44,8 +45,11 @@
       <article class="record-card">
         <div class="badges">
           <span class="ui small horizontal label primary theme-primary">{{ r.created_date_l10n_long }}</span>
-          {% if r.metadata.types | length > 0 %}
-            <span class="ui small horizontal label neutral">{{ r.metadata.types[0] }}</span>
+          {#- RDM records carry the OpenAIRE term here (info:eu-repo/semantics/...),
+              a URI and no label; a dataset shows up as "other". #}
+          {%- set dc_type = r.metadata.types[0] if r.metadata.types else "" %}
+          {% if dc_type and not dc_type.startswith("info:eu-repo/") %}
+            <span class="ui small horizontal label neutral">{{ dc_type }}</span>
           {% endif %}
           <span class="ui small horizontal label access-status {{ r.access_status.id }}">
             <i class="icon {{ r.access_status.icon }}"></i>
