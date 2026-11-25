@@ -9,16 +9,15 @@ import pytest
 from flask import Flask, g
 from flask_babel import Babel
 
-from invenio_override import InvenioOverride, config, ext, visibility
+from invenio_override import InvenioOverride, config, visibility
 from invenio_override.dashboard import DashboardEntry
 
 
 def _stub_data_models(monkeypatch):
-    """Nobody may view or deposit marc21 and lom records, the app has neither."""
+    """Nobody may deposit marc21 and lom records, the app has neither."""
     service = SimpleNamespace(
         records_service=SimpleNamespace(check_permission=lambda *args: False)
     )
-    monkeypatch.setattr(ext, "current_identity_can_view", lambda: False)
     monkeypatch.setattr(visibility, "current_records_marc21", service)
     monkeypatch.setattr(visibility, "current_records_lom", service)
 

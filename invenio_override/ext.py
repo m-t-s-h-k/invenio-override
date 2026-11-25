@@ -8,11 +8,6 @@ from flask import has_request_context, request
 from flask_login import login_required
 from invenio_i18n import lazy_gettext as _
 
-try:
-    from invenio_records_marc21.ui.theme import current_identity_can_view
-except (ImportError, AttributeError):
-    current_identity_can_view = lambda: False
-
 from . import config
 from .views import (
     blueprint,
@@ -22,7 +17,7 @@ from .views import (
     make_redirect,
     require_authenticated,
 )
-from .visibility import can_upload_oer, can_upload_publications, public_entries
+from .visibility import public_entries
 
 
 class InvenioOverride(object):
@@ -61,9 +56,6 @@ class InvenioOverride(object):
                 else []
             )
             return {
-                "can_view_marc21": current_identity_can_view(),
-                "can_upload_publications": can_upload_publications(),
-                "can_upload_oer": can_upload_oer(),
                 "override_header_links": public_entries(
                     app.config.get("OVERRIDE_HEADER_LINKS", [])
                 ),
