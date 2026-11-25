@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2020-2026 Graz University of Technology.
+# SPDX-FileCopyrightText: 2026 University of Graz.
 # SPDX-License-Identifier: MIT
 
 """invenio module for configurable theme."""
 
 from collections.abc import Callable
 
-from invenio_i18n import gettext as _
+from invenio_i18n import lazy_gettext as _
 
 # ============================================================================
 # Search Configuration
